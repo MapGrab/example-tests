@@ -6,18 +6,13 @@ test.describe("Map Test", () => {
   });
 
   test("map should display Honduras", async ({ mapLocator }) => {
-    const hondurasLocator = mapLocator(
-      `map[id=mainMap] layer[id=countries] filter['==', ['get', 'fid'], 11]`
-    );
+    const hondurasLocator = mapLocator(`map[id=mainMap] layer[id=countries] filter['==', ['get', 'fid'], 11]`);
 
     await expect(hondurasLocator).toBeVisibleOnMap();
   });
 
-  test("map should display popup after click on Honduras", async ({
-    mapLocator,
-    page,
-  }) => {
-    const hondurasLocator = mapLocator( `map[id=mainMap] layer[id=countries] filter['==', ['get', 'fid'], 11]`);
+  test("map should display popup after click on Honduras", async ({ mapLocator, page }) => {
+    const hondurasLocator = mapLocator(`map[id=mainMap] layer[id=countries] filter['==', ['get', 'fid'], 11]`);
 
     await hondurasLocator.click();
 
@@ -27,9 +22,7 @@ test.describe("Map Test", () => {
   test("map should display cities dots", async ({ mapLocator }) => {
     const countryDots = mapLocator(`map[id=mainMap] layer[id=countries-dots]`).merge(); //merge all elements bbox;
 
-    await expect(
-      await countryDots.screnshoot({ expose: { backgroundColor: "red" } })
-    ).toMatchSnapshot("cities-dots.png");
+    await expect(await countryDots.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("cities-dots.png");
   });
 
   test("map should display cities icons after button clicked", async ({ mapLocator, mapController, page }) => {
@@ -43,8 +36,6 @@ test.describe("Map Test", () => {
       page.locator('#showCitiesButton').click()
     ]);
 
-    await expect(
-      await citiesIcons.screnshoot({ expose: { backgroundColor: "red" } })
-    ).toMatchSnapshot("cities-dots.png");
+    await expect(await citiesIcons.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("cities-dots.png");
   });
 });
