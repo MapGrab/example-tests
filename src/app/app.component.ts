@@ -26,7 +26,7 @@ export class AppComponent implements AfterContentInit {
 
     map.on('click', 'countries-label', (ev) => {
       const point = map.unproject(ev.point);
-      new Popup({ className: 'info-popup__city' })
+      new Popup({ className: 'info-popup__country' })
         .setText(ev.features![0]!.properties['NAME'])
         .setLngLat(point)
         .addTo(map);
