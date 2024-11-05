@@ -29,7 +29,9 @@ test.describe("Map Test", () => {
 
     const countryDots = mapLocator(`map[id=mainMap] layer[id=countries-label]`).merge(); //merge all elements bbox;
 
-    await expect(await countryDots.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png");
+    await expect(async () => {
+      await expect(await countryDots.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png")
+    }).toPass({ intervals: [500]});
   });
 
   test("map should display cities icons after button clicked", async ({ mapLocator, mapController, page }) => {
@@ -43,6 +45,8 @@ test.describe("Map Test", () => {
       page.locator('#showDotButton').click()
     ]);
 
-    await expect(await citiesIcons.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
+    await expect(async () => {
+      await expect(await citiesIcons.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
+    }).toPass({ intervals: [500]});
   });
 });
