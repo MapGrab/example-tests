@@ -68,18 +68,18 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], ...opts },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'], ...opts },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'], ...opts },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     ...opts,
-    //   },
-    // },
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        ...opts,
+      },
+    },
 
     /* Test against mobile viewports. */
     // {
