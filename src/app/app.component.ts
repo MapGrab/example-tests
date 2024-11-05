@@ -58,4 +58,10 @@ export class AppComponent implements AfterContentInit {
       },
     });
   }
+
+  showDotDelay(): void {
+    setTimeout(() => {
+      this.showDot();
+    }, 2000);
+  }
 }

@@ -15,7 +15,7 @@ test.describe("Map Test", () => {
     const hondurasCountryLocator = mapLocator(`map[id=mainMap] layer[id=countries-fill] filter["all", ["==", ["get", "fid"], 136]]`);
     const hondurasLabelLocator = mapLocator(`map[id=mainMap] layer[id=countries-label] filter["all", ["==", ["get", "ABBREV"], "Hond."]]`);
 
-    //Fit map to Honduras country fill
+    //Fit map to Honduras country bbox
     await hondurasCountryLocator.fitMap();
     await hondurasLabelLocator.click();
 
@@ -25,28 +25,43 @@ test.describe("Map Test", () => {
   test("map should display country labels", async ({ mapLocator }) => {
     const hondurasLocator = mapLocator(`map[id=mainMap] layer[id=countries-fill] filter["all", ["==", ["get", "fid"], 136]]`);
 
+    // Fit map to Honduras and add padding do display other countries labels
     await hondurasLocator.fitMap({ padding: { left: 50, right: 50, top: 50, bottom: 50} });
 
-    const countryDots = mapLocator(`map[id=mainMap] layer[id=countries-label]`).merge(); //merge all elements bbox;
+    const countriesLabels = mapLocator(`map[id=mainMap] layer[id=countries-label]`).merge(); //merge all elements bbox;
 
     await expect(async () => {
-      await expect(await countryDots.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png")
-    }).toPass({ intervals: [500]});
+      await expect(await countriesLabels.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png")
+    }).toPass();
   });
 
-  test("map should display cities icons after button clicked", async ({ mapLocator, mapController, page }) => {
-    const citiesIcons = mapLocator(`map[id=mainMap] layer[id=center-dot]`);
+  test("map should display dot on map when 'Show dot' button clicked", async ({ mapLocator, mapController, page }) => {
+    const dotLocator = mapLocator(`map[id=mainMap] layer[id=center-dot]`);
     const controller = mapController('mainMap');
 
-    await controller.waitToMapStable();
-    
+    await controller.waitToMapLoaded();
+
+    await page.locator('#showDotButton').click()
+
+    await expect(async () => {
+      await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
+    }).toPass();
+  });
+
+  // Test simulating loading server data, demonstrate waitToMapRepaint()
+  test("map should display dot on map when 'Show dot delayed' button clicked", async ({ mapLocator, mapController, page }) => {
+    const dotLocator = mapLocator(`map[id=mainMap] layer[id=center-dot]`);
+    const controller = mapController('mainMap');
+
+    await controller.waitToMapLoaded();
+
     await Promise.all([
       controller.waitToMapRepaint(),
-      page.locator('#showDotButton').click()
+      page.locator('#showDotDelayButton').click(),
     ]);
 
     await expect(async () => {
-      await expect(await citiesIcons.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
-    }).toPass({ intervals: [500]});
+      await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
+    }).toPass({ timeout: 1000 });
   });
 });
