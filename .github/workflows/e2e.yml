@@ -1,0 +1,30 @@
+name: Run map e2e tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        required: true
+        default: "warning"
+        type: choice
+        options:
+          - warning
+
+jobs:
+  run-tests:
+    name: Run npm on Ubuntu
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Setup registry
+        run: echo //npm.pkg.github.com/:_authToken=$NPM_TOKEN > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install deps
+        run: pnpm i && npx playwright install
+      - name: Run tests
+        run: npm run test

@@ -1,7 +1,7 @@
 import { AfterContentInit, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Map, Popup } from 'maplibre-gl';
-import { installMapGrab } from '@mapgrab-priv/map-interface';
+import { installMapGrab } from '@marucjmar/map-interface';
 import { point } from '@turf/turf';
 
 @Component({
