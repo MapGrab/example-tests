@@ -1,3 +1,5 @@
+[![Run map e2e tests](https://github.com/MapGrab/example-tests/actions/workflows/e2e.yml/badge.svg)](https://github.com/MapGrab/example-tests/actions/workflows/e2e.yml)
+
 # MapgrabDemo tests (MacOS ARM only)
 
 ### 1. - Setup .npmrc with private access token
