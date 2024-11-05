@@ -21,6 +21,7 @@ const opts = {
       '--force-color-profile=srgb', // Force all monitors to be treated as though they have the specified color profile.
       '--use-gl=egl',
       '--enable-webgl',
+      '--enable-gpu',
       '--enable-webgl-image-chromium',
       '--ignore-gpu-blocklist',
     ],
@@ -48,17 +49,7 @@ export default defineConfig({
     trace: 'on',
     video: 'on',
 
-    launchOptions: {
-      args: [
-        // https://peter.sh/experiments/chromium-command-line-switches/
-        '--force-device-scale-factor=1', // Overrides the device scale factor for the browser UI and the contents.
-        '--force-color-profile=srgb', // Force all monitors to be treated as though they have the specified color profile.
-        '--use-gl=egl',
-        '--enable-webgl',
-        '--enable-webgl-image-chromium',
-        '--ignore-gpu-blocklist',
-      ],
-    },
+    ...opts,
   },
   webServer: {
     command: 'npm run start',
