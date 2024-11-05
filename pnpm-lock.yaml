@@ -29,12 +29,12 @@ dependencies:
   '@angular/router':
     specifier: ^18.2.0
     version: 18.2.10(@angular/common@18.2.10)(@angular/core@18.2.10)(@angular/platform-browser@18.2.10)(rxjs@7.8.1)
+  '@mapgrab/map-interface':
+    specifier: ^0.0.3
+    version: 0.0.3(mapbox-gl@3.7.0)(maplibre-gl@4.7.1)
   '@mapgrab/playwright':
     specifier: ^0.0.3
     version: 0.0.3(playwright@1.48.2)
-  '@marucjmar/map-interface':
-    specifier: ^0.0.0
-    version: 0.0.0(mapbox-gl@3.7.0)(maplibre-gl@4.7.1)
   '@turf/circle':
     specifier: ^7.1.0
     version: 7.1.0
@@ -2584,6 +2584,21 @@ packages:
       tslib: 2.8.1
     dev: false
 
+  /@mapgrab/map-interface@0.0.3(mapbox-gl@3.7.0)(maplibre-gl@4.7.1):
+    resolution: {integrity: sha512-lscamUb4n7hyCd8oKdbDU+etnyFB/wEVx3R8YoYbSoHEnAEedM08Nc7bAzQn39V26Nwnde0tS9xOV7yXoM8K7g==}
+    peerDependencies:
+      mapbox-gl: '>=2.0.0'
+      maplibre-gl: '>=4.3.0'
+    dependencies:
+      '@mapgrab/map-interface-types': 0.1.1
+      '@mapgrab/map-locator': 0.0.2
+      '@turf/bbox-clip': 7.0.0
+      '@turf/meta': 7.0.0
+      mapbox-gl: 3.7.0
+      maplibre-gl: 4.7.1
+      tslib: 2.8.1
+    dev: false
+
   /@mapgrab/map-locator@0.0.2:
     resolution: {integrity: sha512-l6w4D97lnKGTeL/31E2ikvrJ7Qz9TksB0PneaROhMweU7UdiJZy7UWzic9ulFIe44FWA0BjCl/w0iM9hZ0JyCw==}
     dependencies:
@@ -2610,21 +2625,6 @@ packages:
       quickselect: 2.0.0
       rw: 1.3.3
       tinyqueue: 3.0.0
-    dev: false
-
-  /@marucjmar/map-interface@0.0.0(mapbox-gl@3.7.0)(maplibre-gl@4.7.1):
-    resolution: {integrity: sha512-hRIBfCM5MuRNo/WlcYfVPO7l6Zs2A+uu61euICRoC7PSXVy2cxUUC5KupCrq6IyimSoADxgvsO5wjjclcYGh+Q==, tarball: https://npm.pkg.github.com/download/@marucjmar/map-interface/0.0.0/81d9923595e9109b36fde0647c4ac3930dd709a3}
-    peerDependencies:
-      mapbox-gl: '>=2.0.0'
-      maplibre-gl: '>=4.3.0'
-    dependencies:
-      '@mapgrab/map-interface-types': 0.1.1
-      '@mapgrab/map-locator': 0.0.2
-      '@turf/bbox-clip': 7.0.0
-      '@turf/meta': 7.0.0
-      mapbox-gl: 3.7.0
-      maplibre-gl: 4.7.1
-      tslib: 2.8.1
     dev: false
 
   /@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3:

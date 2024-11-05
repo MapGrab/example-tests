@@ -1,12 +1,18 @@
-import { AfterContentInit, Component } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  NgZone,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Map, Popup } from 'maplibre-gl';
-import { installMapGrab } from '@marucjmar/map-interface';
+import { installMapGrab } from '@mapgrab/map-interface';
 import { point } from '@turf/turf';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -14,25 +20,29 @@ import { point } from '@turf/turf';
 export class AppComponent implements AfterContentInit {
   private map?: Map;
 
+  constructor(private readonly ngZone: NgZone) {}
+
   public ngAfterContentInit(): void {
-    this.map = new Map({
-      container: 'map',
-      style: 'https://demotiles.maplibre.org/style.json',
-      center: [0, 0],
-      zoom: 1,
+    this.ngZone.runOutsideAngular(() => {
+      this.map = new Map({
+        container: 'map',
+        style: 'https://demotiles.maplibre.org/style.json',
+        center: [0, 0],
+        zoom: 1,
+      });
+
+      const map = this.map;
+
+      map.on('click', 'countries-label', (ev) => {
+        const point = map.unproject(ev.point);
+        new Popup({ className: 'info-popup__country' })
+          .setText(ev.features![0]!.properties['NAME'])
+          .setLngLat(point)
+          .addTo(map);
+      });
+
+      installMapGrab(map, 'mainMap');
     });
-
-    const map = this.map;
-
-    map.on('click', 'countries-label', (ev) => {
-      const point = map.unproject(ev.point);
-      new Popup({ className: 'info-popup__country' })
-        .setText(ev.features![0]!.properties['NAME'])
-        .setLngLat(point)
-        .addTo(map);
-    });
-
-    installMapGrab(map, 'mainMap');
   }
 
   showDot(): void {
