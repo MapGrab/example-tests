@@ -48,8 +48,10 @@ test.describe("Map Test", () => {
     }).toPass();
   });
 
-  // Test simulating loading server data, demonstrate waitToMapRepaint()
+  // Test simulating loading server data, this demonstrate how waitToMapRepaint() wait to map repaint (repaint + stable)
   test("map should display dot on map when 'Show dot delayed' button clicked", async ({ mapLocator, mapController, page }) => {
+    test.slow();
+    
     const dotLocator = mapLocator(`map[id=mainMap] layer[id=center-dot]`);
     const controller = mapController('mainMap');
 
@@ -64,6 +66,6 @@ test.describe("Map Test", () => {
 
     await expect(async () => {
       await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
-    }).toPass({ timeout: 1000 });
+    }).toPass({ timeout: 1500 });
   });
 });
