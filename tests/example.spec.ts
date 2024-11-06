@@ -53,11 +53,11 @@ test.describe("Map Test", () => {
     const dotLocator = mapLocator(`map[id=mainMap] layer[id=center-dot]`);
     const controller = mapController('mainMap');
 
-    //Wait to paint done
+    // Wait to first map paint done
     await controller.waitToMapStable();
 
     await Promise.all([
-      // Wait to repaint after dot added to map
+      // Wait to map repaint (second paint) after dot added to map
       controller.waitToMapRepaint(),
       page.locator('#showDotDelayButton').click(),
     ]);
