@@ -64,8 +64,6 @@ test.describe("Map Test", () => {
       page.locator('#showDotDelayButton').click(),
     ]);
 
-    await expect(async () => {
-      await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
-    }).toPass({ timeout: 4000 });
+    await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
   });
 });
