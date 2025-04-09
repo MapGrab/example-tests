@@ -30,9 +30,7 @@ test.describe("Map Test", () => {
 
     const countriesLabels = mapLocator(`map[id=mainMap] layer[id=countries-label]`).merge(); //merge all elements bbox;
 
-    await expect(async () => {
-      await expect(await countriesLabels.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png")
-    }).toPass();
+    await expect(await countriesLabels.screnshoot({ expose: { backgroundColor: "red" } })).toMatchSnapshot("country-label.png")
   });
 
   test("map should display dot on map when 'Show dot' button clicked", async ({ mapLocator, mapController, page }) => {
@@ -43,9 +41,7 @@ test.describe("Map Test", () => {
 
     await page.locator('#showDotButton').click()
 
-    await expect(async () => {
-      await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
-    }).toPass();
+    await expect(await dotLocator.screnshoot({ expose: { backgroundColor: "blue" }, padding: 20 })).toMatchSnapshot("display-dot.png");
   });
 
   // Test simulating loading server data, this demonstrate how waitToMapRepaint() wait to map repaint (repaint + stable)
