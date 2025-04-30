@@ -19,11 +19,11 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
-    "@mapgrab/map-interface": "^0.0.3",
+    "@mapgrab/map-interface": "^1.0.1",
     "@mapgrab/playwright": "^0.0.3",
     "@turf/circle": "^7.1.0",
     "@turf/turf": "^7.1.0",
-    "maplibre-gl": "^4.7.1",
+    "maplibre-gl": "^5.4.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
